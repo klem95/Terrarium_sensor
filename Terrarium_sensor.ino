@@ -1,14 +1,18 @@
 #include "DHT.h"
 #include "SampleTracker.h"
+#include "DisplayManager.h"
 
-#define DHTTYPE DHT11   // DHT 11
-#define DHTPIN 8     // Digital pin connected to the DHT sensor
+#define DHTTYPE DHT11 // DHT 11
+#define DHTPIN 8  // Digital pin connected to the DHT sensor
 
 DHT dht(DHTPIN, DHTTYPE);
 
 SampleTracker sampleTracker;
+DisplayManager displayMananger;
+
 int stopper = -1; // Remove
 int sampleDelay = 2000; // Find a good delay???
+int logoDelay = 2000;
 
 /* TO-DO
  * 1) Make function for avg readings (c and h)
@@ -18,13 +22,32 @@ int sampleDelay = 2000; // Find a good delay???
 void setup() {
   // put your setup code here, to run once:
   Serial.begin(9600);
+  
   dht.begin();
-  Serial.println("initialization over");
+  
   stopper = sampleTracker.sampleBufferLength;
+
+  displayMananger.initializeDisplay();
+  //displayMananger.screenWipe();
+  displayMananger.showReadings();
+
+  /*
+  if(!display.begin(SSD1306_SWITCHCAPVCC, SCREEN_ADDRESS)) {
+    Serial.println(F("SSD1306 allocation failed"));
+    for(;;); // Don't proceed, loop forever
+  }
+  
+  display.display();
+  
+  delay(logoDelay);
+  */
+  
+  Serial.println("initialization over");
 
 }
 void loop() {
   
+  /*
   delay(sampleDelay);
 
   // REMOVE!
@@ -66,4 +89,5 @@ void loop() {
    }
   Serial.println("___"); 
   }
+  */
 }

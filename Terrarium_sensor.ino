@@ -29,7 +29,8 @@ void setup() {
 
   displayMananger.initializeDisplay();
   //displayMananger.screenWipe();
-  displayMananger.showReadings();
+  //displayMananger.showReadings(25.2, 64);
+
 
   /*
   if(!display.begin(SSD1306_SWITCHCAPVCC, SCREEN_ADDRESS)) {
@@ -46,7 +47,8 @@ void setup() {
 
 }
 void loop() {
-  
+    displayMananger.playLoadingAni();
+
   /*
   delay(sampleDelay);
 
